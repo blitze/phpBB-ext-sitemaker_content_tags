@@ -10,8 +10,6 @@
 
 namespace blitze\tags\blocks;
 
-use blitze\sitemaker\services\blocks\driver\block;
-
 /**
  * SiteMaker Content Tags Tag Cloud block.
  */

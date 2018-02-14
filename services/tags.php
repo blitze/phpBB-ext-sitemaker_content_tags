@@ -74,7 +74,7 @@ class tags
 		{
 			$sql = 'SELECT * FROM ' . $this->tags_table . ' WHERE ' . $this->db->sql_in_set('tag_name', $tag_names);
 			$result = $this->db->sql_query($sql);
-	
+
 			while ($row = $this->db->sql_fetchrow($result))
 			{
 				$tags[$row['tag_id']] = $row['tag_name'];
