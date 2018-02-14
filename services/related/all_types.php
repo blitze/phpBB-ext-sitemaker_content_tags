@@ -61,7 +61,7 @@ class all_types extends base
 	 * @param array $posts_data
 	 * @param array $users_cache
 	 * @param array $topic_tracking_info
-	 * @param array $view_mode_fields
+	 * @param array $image_fields
 	 * @return array
 	 */
 	protected function get_topics(\blitze\content\model\entity\type $entity, $topics_data, $posts_data, $users_cache, $topic_tracking_info, array &$image_fields)

@@ -36,7 +36,7 @@ class field implements EventSubscriberInterface
 	/**
 	 * @return array
 	 */
-	static public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 		return array(
 			'blitze.content.fields.set_values'			=> 'set_topics_tags',
@@ -55,7 +55,6 @@ class field implements EventSubscriberInterface
 
 		if (sizeof($tags_fields) && sizeof($event['db_fields']))
 		{
-			$field_tags = array();
 			foreach ($tags_fields as $field)
 			{
 				$event['db_fields'] = array_replace_recursive($event['db_fields'], $this->tags->get_field_tags_by_topic(array_keys($event['db_fields']), $field));

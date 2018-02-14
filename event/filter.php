@@ -46,7 +46,7 @@ class filter implements EventSubscriberInterface
 	/**
 	 * @return array
 	 */
-	static public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 		return array(
 			'blitze.content.view.filter'	=> 'filter_by_tag',

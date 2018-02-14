@@ -48,11 +48,11 @@ class search
 	 * @param string $action
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function handle($action)
+	public function handle()
 	{
 		if ($this->request->is_ajax() === false)
 		{
-			redirect(generate_board_url(), $this->return_url);
+			redirect(generate_board_url());
 		}
 
 		$term = $this->request->variable('term', '', true);
