@@ -72,20 +72,14 @@ class all_types extends base
 		foreach ($topics_data as $topic_id => $topic_data)
 		{
 			$content_type = $this->types->get_forum_type($topic_data['forum_id']);
-
 			if (!($entity = $this->types->get_type($content_type)))
 			{
 				continue;
 			}
 
-			$view_mode_fields = $this->get_image_field($entity);
-			$this->fields->set_content_type($content_type);
-			$this->fields->set_form_fields($view_mode_fields);
-			$this->fields->set_content_fields($view_mode_fields, $entity->get_content_fields());
-
-			$post_data	= array_shift($posts_data[$topic_id]);
+			$this->init_fields($entity, $image_fields);
+			$post_data = array_shift($posts_data[$topic_id]);
 			$topics[] = $this->fields->show($content_type, $topic_data, $post_data, $users_cache, $attachments, $update_count, $topic_tracking_info);
-			$image_fields += $view_mode_fields;
 		}
 		$image_fields = array_filter($image_fields);
 
@@ -101,5 +95,21 @@ class all_types extends base
 		$this->forum->query()
 			->fetch_custom($this->get_sql_array($topic_data['topic_id']))
 			->build(true, true, false);
+	}
+
+	/**
+	 * @param \blitze\content\model\entity\type $entity
+	 * @param array $image_fields
+	 * @return void
+	 */
+	protected function init_fields(\blitze\content\model\entity\type $entity, array &$image_fields)
+	{
+		$fields = $this->get_image_field($entity);
+
+		$this->fields->set_content_type($entity->get_content_name());
+		$this->fields->set_form_fields($fields);
+		$this->fields->set_content_fields($fields, $entity->get_content_fields());
+
+		$image_fields += $fields;
 	}
 }

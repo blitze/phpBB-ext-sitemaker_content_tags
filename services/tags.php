@@ -161,15 +161,11 @@ class tags
 	{
 		$sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 't.tag_id',
-			'FROM'		=> array(
-				$this->tags_table    => 't',
-			),
-			'LEFT_JOIN'	=> array(
-				array(
-					'FROM'	=> array($this->tags_data_table => 'd'),
-					'ON'	=> "d.tag_id = t.tag_id",
-				)
-			),
+			'FROM'		=> array($this->tags_table => 't'),
+			'LEFT_JOIN'	=> array(array(
+				'FROM'	=> array($this->tags_data_table => 'd'),
+				'ON'	=> "d.tag_id = t.tag_id",
+			)),
 			'WHERE'		=> "d.tag_id IS NULL"
 		));
 		$result = $this->db->sql_query($sql);

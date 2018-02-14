@@ -73,14 +73,7 @@ class field extends \blitze\content\services\form\field\base
 		$callable = 'get_' . $this->get_display_type($data['field_props']['display'], $label_class) . '_props';
 		$list = $this->get_html_list($data['field_value'], $callable, $content_type);
 
-		if ($data['field_props']['display'] === 'label')
-		{
-			return '<span class="sm-label ' . $label_class . '-color">' . join('', $list) . '</span>';
-		}
-		else
-		{
-			return join($this->delimitter, $list);
-		}
+		return $this->show_tags($list, $label_class, $data['field_props']['display']);
 	}
 
 	/**
@@ -237,5 +230,23 @@ class field extends \blitze\content\services\form\field\base
 			$this->get_label_props(),
 			array(' style="background: #' . $row['tag_colour'] . '"')
 		);
+	}
+
+	/**
+	 * @param array $list
+	 * @param string $label_class
+	 * @param string $display_type
+	 * @return string
+	 */
+	protected function show_tags(array $list, $label_class, $display_type)
+	{
+		if ($display_type === 'label')
+		{
+			return '<span class="sm-label ' . $label_class . '-color">' . join('', $list) . '</span>';
+		}
+		else
+		{
+			return join($this->delimitter, $list);
+		}
 	}
 }
