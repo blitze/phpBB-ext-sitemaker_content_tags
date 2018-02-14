@@ -1,0 +1,25 @@
+{
+  "name": "tags",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jQuery-tagEditor": "https://github.com/Pixabay/jQuery-tagEditor"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^4.1.10",
+    "concat": "^1.0.3",
+    "onchange": "^3.3.0",
+    "rimraf": "^2.6.2",
+    "uglify-js": "^3.3.9"
+  },
+  "scripts": {
+    "clean": "rimraf styles/all/theme/assets/*",
+    "concat": "concat -o styles/all/theme/assets/tags.min.js node_modules/jQuery-tagEditor/jquery.caret.min.js node_modules/jQuery-tagEditor/jquery.tag-editor.min.js develop/input.js",
+    "uglify": "uglifyjs -o styles/all/theme/assets/tags.min.js -c -m --source-map -- styles/all/theme/assets/tags.min.js",
+    "build:js": "npm run concat && npm run uglify",
+    "build:css": "cleancss -o styles/all/theme/assets/tags.min.css node_modules/jQuery-tagEditor/jquery.tag-editor.css --source-map",
+    "build": "npm run clean && npm run build:js && npm run build:css",
+    "watch": "onchange 'develop/*.js' -- npm run build:js"
+  }
+}

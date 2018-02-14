@@ -1,0 +1,5 @@
+blitze_tags_search:
+    path: /tags/search
+    defaults: { _controller: blitze.tags.search.controller:handle, _format: json }
+    requirements:
+        _format: json

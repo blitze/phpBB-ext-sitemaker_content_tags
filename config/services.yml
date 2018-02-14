@@ -1,0 +1,85 @@
+imports:
+    - { resource: parameters.yml }
+
+services:
+    blitze.tags:
+        class: blitze\tags\services\tags
+        arguments:
+            - '@dbal.conn'
+            - '%blitze.tags.tables.tags%'
+            - '%blitze.tags.tables.data%'
+
+    blitze.tags.search.controller:
+        class: blitze\tags\controller\search
+        arguments:
+            - '@dbal.conn'
+            - '@request'
+            - '%blitze.tags.tables.tags%'
+            - '%blitze.tags.tables.data%'
+
+# Blocks
+    blitze.tags.block.cloud:
+        class: blitze\tags\blocks\cloud
+        parent: blitze.sitemaker.block.wordgraph
+        arguments:
+            - '@controller.helper'
+            - '@language'
+            - '%blitze.tags.tables.tags%'
+            - '%blitze.tags.tables.data%'
+        calls:
+            - [set_name, [blitze.tags.block.cloud]]
+        tags:
+            - { name: sitemaker.block }
+
+# Related Contents
+    blitze.tags.related.base:
+        class: blitze\tags\services\related\base
+        abstract: true
+        arguments:
+            - '@language'
+            - '@template'
+            - '@blitze.content.fields'
+            - '@blitze.sitemaker.forum.data'
+            - '%blitze.tags.tables.data%'
+
+    blitze.tags.related.all_types:
+        class: blitze\tags\services\related\all_types
+        parent: blitze.tags.related.base
+        arguments:
+            - '@blitze.content.types'
+        tags:
+            - { name: sitemaker.content.topic_blocks }
+
+    blitze.tags.related.same_type:
+        class: blitze\tags\services\related\same_type
+        parent: blitze.tags.related.base
+        tags:
+            - { name: sitemaker.content.topic_blocks }
+
+# Events
+    blitze.tags.event.field:
+        class: blitze\tags\event\field
+        arguments:
+            - '@blitze.tags'
+        tags:
+            - { name: event.listener }
+
+    blitze.tags.event.filter:
+        class: blitze\tags\event\filter
+        arguments:
+            - '@dbal.conn'
+            - '%blitze.tags.tables.tags%'
+            - '%blitze.tags.tables.data%'
+        tags:
+            - { name: event.listener }
+
+# Content field
+    blitze.tags.form.field:
+        class: blitze\tags\services\field
+        parent: blitze.content.form.field.base
+        arguments:
+            - '@controller.helper'
+            - '@blitze.tags'
+            - '@blitze.sitemaker.util'
+        tags:
+            - { name: sitemaker.content.form.field }

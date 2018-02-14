@@ -1,0 +1,3 @@
+parameters:
+    blitze.tags.tables.tags: '%core.table_prefix%sm_tags'
+    blitze.tags.tables.data: '%core.table_prefix%sm_tags_data'

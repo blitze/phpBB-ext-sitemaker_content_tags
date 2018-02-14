@@ -1,0 +1,39 @@
+{% if field.FIELD_TYPE == 'tags' %}
+	{% import '@blitze_content/fields/_macros.html' as forms %}
+	<div class="field-settings">
+		<dl>
+			<dt><label for="{{ field.FIELD_NAME ~ '-display' }}">{{ lang('TAGS_DISPLAY') }}</label></dt>
+			<dd>
+				{%- set display_types = [
+					{ value: 'list', label: 'TAGS_DISPLAY_LIST' },
+					{ value: 'button', label: 'TAGS_DISPLAY_BUTTON' },
+					{ value: 'label', label: 'TAGS_DISPLAY_LABEL' },
+				] -%}
+				{{ forms.dropdown(field.FIELD_NAME ~ '-display', 'field_props[' ~ field.FIELD_NAME ~ '][display]', field.FIELD_PROPS.display, display_types, true) }}
+			</dd>
+		</dl>
+		<dl id="{{ field.FIELD_NAME ~ '-display-label' }}">
+			<dt><label for="{{ field.FIELD_NAME ~ '-label_colour' }}">{{ lang('TAGS_LABEL_COLOUR') ~ lang('COLON') }}</label></dt>
+			<dd>
+				{%- set label_colours = [
+					{ value: 'no', label: 'TAGS_LABEL_COLOUR_NONE' },
+					{ value: 'primary', label: 'TAGS_LABEL_COLOUR_PRIMARY' },
+					{ value: 'secondary', label: 'TAGS_LABEL_COLOUR_SECONDARY' },
+					{ value: 'grayscale', label: 'TAGS_LABEL_COLOUR_GRAYSCALE' },
+					{ value: 'info', label: 'TAGS_LABEL_COLOUR_INFO' },
+					{ value: 'sucess', label: 'TAGS_LABEL_COLOUR_SUCCESS' },
+					{ value: 'warning', label: 'TAGS_LABEL_COLOUR_WARNING' },
+					{ value: 'danger', label: 'TAGS_LABEL_COLOUR_DANGER' },
+					{ value: 'dynamic', label: 'TAGS_LABEL_COLOUR_DYNAMIC' },
+				] -%}
+				{{ forms.dropdown(field.FIELD_NAME ~ '-label_colour', 'field_props[' ~ field.FIELD_NAME ~ '][label_colour]', field.FIELD_PROPS.label_colour, label_colours) }}
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="{{ field.FIELD_NAME ~ '-max_tags' }}">{{ lang('TAGS_MAX_TAGS') ~ lang('COLON') }}</label><br /><span>{{ lang('TAGS_MAX_TAGS_EXPLAIN') }}</span></dt>
+			<dd>
+				{{ forms.input(field.FIELD_NAME ~ '-max_tags', 'field_props[' ~ field.FIELD_NAME ~ '][max_tags]', field.FIELD_PROPS.max_tags, 'number', 3, '', 0) }}
+			</dd>
+		</dl>
+	</div>
+{% endif %}
