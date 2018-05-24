@@ -108,7 +108,7 @@ class cloud extends \blitze\sitemaker\blocks\wordgraph
 	{
 		return $this->helper->route('blitze_content_filter', array(
 			'filter_type'	=> 'tag',
-			'filter_value'	=> urlencode($tag),
+			'filter_value'	=> urlencode(strtolower($tag)),
 		));
 	}
 }
