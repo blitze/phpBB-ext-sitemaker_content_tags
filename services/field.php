@@ -58,22 +58,23 @@ class field extends \blitze\content\services\form\field\base
 	/**
 	 * @inheritdoc
 	 */
-	public function display_field(array $data = array(), $view_mode = 'summary', array $topic_data = array(), $content_type = '')
+	public function display_field(array $data, array $topic_data, $view_mode)
 	{
 		$this->preview_tags($data);
 
-		if (!sizeof($data['field_value']))
+		if (empty($data['field_value']))
 		{
 			return '';
 		}
 
 		$this->delimitter = $this->language->lang('COMMA_SEPARATOR');
 
+		$display = ($view_mode !== 'print') ? $data['field_props']['display'] : 'list';
 		$label_class = $data['field_props']['label_colour'];
-		$callable = 'get_' . $this->get_display_type($data['field_props']['display'], $label_class) . '_props';
-		$list = $this->get_html_list($data['field_value'], $callable, $content_type);
+		$callable = 'get_' . $this->get_display_type($display, $label_class) . '_props';
+		$list = $this->get_html_list($data['field_value'], $callable, $data['content_type']);
 
-		return $this->show_tags($list, $label_class, $data['field_props']['display']);
+		return $this->show_tags($list, $label_class, $display);
 	}
 
 	/**
