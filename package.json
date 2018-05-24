@@ -7,11 +7,11 @@
     "jQuery-tagEditor": "https://github.com/Pixabay/jQuery-tagEditor"
   },
   "devDependencies": {
-    "clean-css-cli": "^4.1.10",
+    "clean-css-cli": "^4.1.11",
     "concat": "^1.0.3",
     "onchange": "^3.3.0",
     "rimraf": "^2.6.2",
-    "uglify-js": "^3.3.9"
+    "uglify-js": "^3.3.23"
   },
   "scripts": {
     "clean": "rimraf styles/all/theme/assets/*",
