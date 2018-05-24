@@ -25,6 +25,8 @@ abstract class base implements \blitze\content\services\topic\driver\block_inter
 
 	/** @var string */
 	protected $tags_data_table;
+	
+	protected $max_topics = 3;
 
 	/**
 	 * Constructor
