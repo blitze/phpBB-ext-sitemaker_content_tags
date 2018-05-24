@@ -45,7 +45,6 @@ class search
 	}
 
 	/**
-	 * @param string $action
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function handle()
