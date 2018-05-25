@@ -25,7 +25,8 @@ abstract class base implements \blitze\content\services\topic\driver\block_inter
 
 	/** @var string */
 	protected $tags_data_table;
-	
+
+	/** @var int */
 	protected $max_topics = 3;
 
 	/**
@@ -71,6 +72,28 @@ abstract class base implements \blitze\content\services\topic\driver\block_inter
 			'HAS_IMG'	=> (bool) $image_field,
 		));
 	}
+
+	/**
+	 * @param array $topic_data
+	 * @return void
+	 */
+	abstract protected function build_query(array $topic_data);
+
+	/**
+	 * @return string
+	 */
+	abstract protected function get_title();
+
+	/**
+	 * @param \blitze\content\model\entity\type $entity
+	 * @param array $topics_data
+	 * @param array $posts_data
+	 * @param array $users_cache
+	 * @param array $topic_tracking_info
+	 * @param array $image_fields
+	 * @return array
+	 */
+	abstract protected function get_topics(\blitze\content\model\entity\type $entity, $topics_data, $posts_data, $users_cache, $topic_tracking_info, array &$image_fields);
 
 	/**
 	 * @param \blitze\content\model\entity\type $entity
