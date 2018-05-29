@@ -80,9 +80,10 @@ abstract class base implements \blitze\content\services\topic\driver\block_inter
 	abstract protected function build_query(array $topic_data);
 
 	/**
+	 * @param \blitze\content\model\entity\type $entity
 	 * @return string
 	 */
-	abstract protected function get_title();
+	abstract protected function get_title(\blitze\content\model\entity\type $entity);
 
 	/**
 	 * @param \blitze\content\model\entity\type $entity
@@ -109,7 +110,7 @@ abstract class base implements \blitze\content\services\topic\driver\block_inter
 
 	/**
 	 * @param int $topic_id
-	 * @return string
+	 * @return array
 	 */
 	protected function get_sql_array($topic_id)
 	{

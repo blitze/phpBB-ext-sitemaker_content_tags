@@ -61,7 +61,7 @@ class filter implements EventSubscriberInterface
 	{
 		if (isset($event['filters']['tag']))
 		{
-			$sql_array = $event['sql_array'];
+			$sql_array = (array) $event['sql_array'];
 
 			$sql_array = array_merge_recursive($sql_array, array(
 				'FROM'	=> array(

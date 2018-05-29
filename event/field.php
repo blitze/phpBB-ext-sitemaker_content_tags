@@ -51,13 +51,14 @@ class field implements EventSubscriberInterface
 	 */
 	public function set_topics_tags(\phpbb\event\data $event)
 	{
-		$tags_fields = $this->get_tag_fields($event['view_mode_fields']);
+		$tags_fields = $this->get_tag_fields((array) $event['view_mode_fields']);
+		$db_fields = (array) $event['db_fields'];
 
 		if (sizeof($tags_fields) && sizeof($event['db_fields']))
 		{
 			foreach ($tags_fields as $field)
 			{
-				$event['db_fields'] = array_replace_recursive($event['db_fields'], $this->tags->get_field_tags_by_topic(array_keys($event['db_fields']), $field));
+				$event['db_fields'] = array_replace_recursive($db_fields, $this->tags->get_field_tags_by_topic(array_keys($db_fields), $field));
 			}
 		}
 	}
@@ -68,14 +69,17 @@ class field implements EventSubscriberInterface
 	 */
 	public function set_form_field_values(\phpbb\event\data $event)
 	{
-		$tags_fields = $this->get_tag_fields($event['entity']->get_field_types());
+		/** @var \blitze\content\model\entity\type $entity */
+		$entity = $event['entity'];
+		$tags_fields = $this->get_tag_fields($entity->get_field_types());
+
 		foreach ($tags_fields as $field)
 		{
 			$tags = $this->tags->get_field_tags_by_topic(array($event['topic_id']), $field);
 
 			if (isset($tags[$event['topic_id']]))
 			{
-				$fields_data = $event['fields_data'];
+				$fields_data = (array) $event['fields_data'];
 				$tags = array_shift($tags)[$field];
 
 				foreach ($tags as $row)

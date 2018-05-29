@@ -48,21 +48,15 @@ class all_types extends base
 	}
 
 	/**
-	 * @return string
+	 * @inheritdoc
 	 */
-	protected function get_title()
+	protected function get_title(\blitze\content\model\entity\type $entity)
 	{
 		return $this->language->lang('TAGS_RELATED_CONTENTS');
 	}
 
 	/**
-	 * @param \blitze\content\model\entity\type $entity
-	 * @param array $topics_data
-	 * @param array $posts_data
-	 * @param array $users_cache
-	 * @param array $topic_tracking_info
-	 * @param array $image_fields
-	 * @return array
+	 * @inheritdoc
 	 */
 	protected function get_topics(\blitze\content\model\entity\type $entity, $topics_data, $posts_data, $users_cache, $topic_tracking_info, array &$image_fields)
 	{
@@ -72,7 +66,7 @@ class all_types extends base
 		foreach ($topics_data as $topic_id => $topic_data)
 		{
 			$content_type = $this->types->get_forum_type($topic_data['forum_id']);
-			if (!($entity = $this->types->get_type($content_type)))
+			if (!$content_type || !($entity = $this->types->get_type($content_type)))
 			{
 				continue;
 			}
@@ -87,8 +81,7 @@ class all_types extends base
 	}
 
 	/**
-	 * @param array $topic_data
-	 * @return void
+	 * @inheritdoc
 	 */
 	protected function build_query(array $topic_data)
 	{

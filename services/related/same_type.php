@@ -28,8 +28,7 @@ class same_type extends base
 	}
 
 	/**
-	 * @param \blitze\content\model\entity\type $entity
-	 * @return string
+	 * @inheritdoc
 	 */
 	protected function get_title(\blitze\content\model\entity\type $entity)
 	{
@@ -37,13 +36,7 @@ class same_type extends base
 	}
 
 	/**
-	 * @param \blitze\content\model\entity\type $entity
-	 * @param array $topics_data
-	 * @param array $posts_data
-	 * @param array $users_cache
-	 * @param array $topic_tracking_info
-	 * @param array $image_field
-	 * @return array
+	 * @inheritdoc
 	 */
 	protected function get_topics(\blitze\content\model\entity\type $entity, $topics_data, $posts_data, $users_cache, $topic_tracking_info, array &$image_field)
 	{
@@ -63,8 +56,7 @@ class same_type extends base
 	}
 
 	/**
-	 * @param array $topic_data
-	 * @return void
+	 * @inheritdoc
 	 */
 	protected function build_query(array $topic_data)
 	{
