@@ -9,9 +9,9 @@
   "devDependencies": {
     "clean-css-cli": "^4.1.11",
     "concat": "^1.0.3",
-    "onchange": "^3.3.0",
+    "onchange": "^4.0.0",
     "rimraf": "^2.6.2",
-    "uglify-js": "^3.3.23"
+    "uglify-js": "^3.4.0"
   },
   "scripts": {
     "clean": "rimraf styles/all/theme/assets/*",
