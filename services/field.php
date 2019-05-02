@@ -90,11 +90,11 @@ class field extends \blitze\content\services\form\field\base
 
 		$this->util->add_assets(array(
 			'js'   => array(
-				'@blitze_sitemaker/vendor/jquery-ui/jquery-ui.min.js',
+				'@blitze_tags/assets/jquery-ui/jquery-ui.min.js',
 				'@blitze_tags/assets/tags.min.js',
 			),
 			'css'   => array(
-				'@blitze_sitemaker/vendor/jquery-ui/themes/smoothness/jquery-ui.css',
+				'@blitze_tags/assets/jquery-ui/jquery-ui.min.css',
 				'@blitze_tags/assets/tags.min.css',
 			)
 		));
