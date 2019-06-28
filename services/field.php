@@ -132,7 +132,7 @@ class field extends \blitze\content\services\form\field\base
 		$tags = $this->to_array($data['field_value']);
 
 		$get_tag_props = 'get_' . $this->get_display_type($tag_type, $tag_color) . '_props';
-		$get_tag_row = 'get_' . ($display_mode === 'preview' ? 'preview' : 'tag') . '_row'; 
+		$get_tag_row = 'get_' . ($display_mode === 'preview' ? 'preview' : 'tag') . '_row';
 
 		$list = array();
 		foreach ($tags as $row)
