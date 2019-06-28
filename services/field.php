@@ -254,7 +254,7 @@ class field extends \blitze\content\services\form\field\base
 	}
 
 	/**
-	 * @param string $tags
+	 * @param string|array $tags
 	 * @return array
 	 */
 	protected function to_array($tags)
