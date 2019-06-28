@@ -46,22 +46,23 @@ class field extends \blitze\content\services\form\field\base
 	}
 
 	/**
-	 * @inhericdoc
+	 * @inheritdoc
 	 */
-	public function get_field_value(array $data)
+	public function get_default_props()
 	{
-		$data['field_value'] = join(',', (array) $data['field_value']);
-		$value = parent::get_field_value($data);
-		return array_map('trim', array_filter(explode(',', strtolower($value))));
+		return array(
+			'type'			=> 'list',
+			'colour'		=> 'dynamic',
+			'max_tags'		=> 0,
+			'is_db_field'	=> true,
+		);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function display_field(array $data, array $topic_data, $view_mode)
+	public function display_field(array $data, array $topic_data, $display_mode, $view_mode)
 	{
-		$this->preview_tags($data);
-
 		if (empty($data['field_value']))
 		{
 			return '';
@@ -69,21 +70,28 @@ class field extends \blitze\content\services\form\field\base
 
 		$this->delimitter = $this->language->lang('COMMA_SEPARATOR');
 
-		$display = ($view_mode !== 'print') ? $data['field_props']['display'] : 'list';
-		$label_class = $data['field_props']['label_colour'];
-		$callable = 'get_' . $this->get_display_type($display, $label_class) . '_props';
-		$list = $this->get_html_list($data['field_value'], $callable, $data['content_type']);
+		$tag_type = ($view_mode !== 'print') ? $data['field_props']['type'] : 'list';
+		$tag_color = $data['field_props']['colour'];
 
-		return $this->show_tags($list, $label_class, $display);
+		$list = $this->get_html_list($data, $tag_type, $tag_color, $display_mode);
+
+		return $this->show_tags($list, $tag_color, $tag_type);
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function show_form_field($name, array &$data, $forum_id = 0, $topic_id = 0)
+	public function get_submitted_value(array $data)
 	{
-		$data['field_name'] = $name;
-		$data['field_value'] = join(',', $this->get_field_value($data));
+		$data['field_value'] = join(',', (array) $data['field_value']);
+		return parent::get_submitted_value($data);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function show_form_field(array &$data, $forum_id = 0, $topic_id = 0)
+	{
 		$data['tag_search_url'] = $this->helper->route('blitze_tags_search');
 
 		$this->ptemplate->assign_vars($data);
@@ -106,94 +114,80 @@ class field extends \blitze\content\services\form\field\base
 	/**
 	 * @inheritdoc
 	 */
-	public function save_field($tag_names, array $field_data, array $topic_data)
+	public function save_field(array $field_data, array $topic_data)
 	{
-		$this->tags->save($topic_data['topic_id'], $tag_names);
+		$value = $this->to_array($field_data['field_value']);
+		$this->tags->save($topic_data['topic_id'], $value);
 	}
 
 	/**
-	 * @inheritdoc
-	 */
-	public function get_default_props()
-	{
-		return array(
-			'display'		=> 'list',
-			'label_colour'	=> 'dynamic',
-			'max_tags'		=> 0,
-			'is_db_field'	=> true,
-		);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function get_name()
-	{
-		return 'tags';
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function get_langname()
-	{
-		return 'TAGS_FIELD';
-	}
-
-	/**
-	 * @param string $display
-	 * @param string $label_class
-	 * @return string
-	 */
-	protected function get_display_type($display, &$label_class)
-	{
-		if ($display === 'label' && $label_class === 'dynamic')
-		{
-			$display = 'dynamic_label';
-			$label_class = 'primary';
-		}
-		return $display;
-	}
-
-	/**
-	 * @param array $tags
+	 * @param string $value
 	 * @param string $callable
 	 * @param string $content_type
+	 * @param string $display_mode
 	 * @return array
 	 */
-	protected function get_html_list(array $tags, $callable, $content_type)
+	protected function get_html_list(array $data, $tag_type, &$tag_color, $display_mode)
 	{
+		$tags = $this->to_array($data['field_value']);
+
+		$get_tag_props = 'get_' . $this->get_display_type($tag_type, $tag_color) . '_props';
+		$get_tag_row = 'get_' . ($display_mode === 'preview' ? 'preview' : 'tag') . '_row'; 
+
 		$list = array();
 		foreach ($tags as $row)
 		{
-			$tag_url = $this->helper->route('blitze_content_type_filter', array(
-				'type'			=> $content_type,
-				'filter_type'	=> 'tag',
-				'filter_value'	=> urlencode($row['tag_name']),
-			));
-			$list[] = '<a href="' . $tag_url . '"><span' . join(' ', $this->$callable($row)) . '>' . ucwords(censor_text($row['tag_name'])) . '</span></a>';
+			$row = $this->$get_tag_row($row, $data['content_type']);
+			$tag_props = $this->$get_tag_props($row);
+
+			$list[] = '<span' . join(' ', $tag_props) . '><a href="' . $row['tag_url'] . '">' . ucwords(censor_text($row['tag_name'])) . '</a></span>';
 		}
 
 		return $list;
 	}
 
 	/**
-	 * @param array $data
-	 * @return void
+	 * @param string $tag_type
+	 * @param string $tag_color
+	 * @return string
 	 */
-	protected function preview_tags(array &$data)
+	protected function get_display_type($tag_type, &$tag_color)
 	{
-		if ($this->request->is_set('preview') && ($tag_names = $this->get_field_value($data)))
+		if (($tag_type === 'label' || $tag_type === 'badge') && $tag_color === 'dynamic')
 		{
-			$data['field_value'] = array();
-			foreach ($tag_names as $tag)
-			{
-				$data['field_value'][] = array(
-					'tag_name'		=> $tag,
-					'tag_colour'	=> $this->tags->get_color($tag),
-				);
-			}
+			$tag_type = 'dynamic_tag';
+			$tag_color = 'primary';
 		}
+		return $tag_type;
+	}
+
+	/**
+	 * @param array $row
+	 * @param string $content_type
+	 * @return array
+	 */
+	protected function get_tag_row(array $row, $content_type)
+	{
+		$row['tag_url'] = $this->helper->route('blitze_content_type_filter', array(
+			'type'			=> $content_type,
+			'filter_type'	=> 'tag',
+			'filter_value'	=> urlencode($row['tag_name']),
+		));
+
+		return $row;
+	}
+
+	/**
+	 * @param string $tag
+	 * @return array
+	 */
+	protected function get_preview_row($tag)
+	{
+		return array(
+			'tag_name'		=> $tag,
+			'tag_colour'	=> $this->tags->get_color($tag),
+			'tag_url'		=> '#preview',
+		);
 	}
 
 	/**
@@ -222,10 +216,18 @@ class field extends \blitze\content\services\form\field\base
 	}
 
 	/**
+	 * @return array
+	 */
+	protected function get_badge_props()
+	{
+		return $this->get_label_props();
+	}
+
+	/**
 	 * @param array $row
 	 * @return array
 	 */
-	protected function get_dynamic_label_props(array $row)
+	protected function get_dynamic_tag_props(array $row)
 	{
 		return array_merge(
 			$this->get_label_props(),
@@ -235,19 +237,44 @@ class field extends \blitze\content\services\form\field\base
 
 	/**
 	 * @param array $list
-	 * @param string $label_class
-	 * @param string $display_type
+	 * @param string $tag_color
+	 * @param string $tag_type
 	 * @return string
 	 */
-	protected function show_tags(array $list, $label_class, $display_type)
+	protected function show_tags(array $list, $tag_color, $tag_type)
 	{
-		if ($display_type === 'label')
+		if ($tag_type === 'label' || $tag_type === 'badge')
 		{
-			return '<span class="sm-label ' . $label_class . '-color">' . join('', $list) . '</span>';
+			return '<span class="sm-' . $tag_type . ' ' . $tag_color . '-color">' . join('', $list) . '</span>';
 		}
 		else
 		{
 			return join($this->delimitter, $list);
 		}
+	}
+
+	/**
+	 * @param string $tags
+	 * @return array
+	 */
+	protected function to_array($tags)
+	{
+		return is_array($tags) ? $tags : explode(',', $tags);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function get_name()
+	{
+		return 'tags';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function get_langname()
+	{
+		return 'TAGS_FIELD';
 	}
 }
