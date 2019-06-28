@@ -4,8 +4,181 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca06fb69462bcc00a1952a320b44490b",
+    "content-hash": "df04a42fac276be9e4bf673b67d1a493",
     "packages": [
+        {
+            "name": "blitze/content",
+            "version": "3.0.0-RC4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blitze/phpBB-ext-sitemaker_content.git",
+                "reference": "63c03b08a5b094a6f213d1bedfee2feaf7c9cf13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blitze/phpBB-ext-sitemaker_content/zipball/63c03b08a5b094a6f213d1bedfee2feaf7c9cf13",
+                "reference": "63c03b08a5b094a6f213d1bedfee2feaf7c9cf13",
+                "shasum": ""
+            },
+            "require": {
+                "blitze/sitemaker": "^3.2.0-RC1",
+                "cocur/slugify": "^1.4",
+                "composer/installers": "^1.1",
+                "php": ">=5.4",
+                "urodoz/truncate-html": "^1.0"
+            },
+            "require-dev": {
+                "phing/phing": "2.4.*"
+            },
+            "type": "phpbb-extension",
+            "extra": {
+                "display-name": "SiteMaker Content Types",
+                "soft-require": {
+                    "phpbb/phpbb": ">=3.2.2,<3.3.0@dev"
+                },
+                "version-check": {
+                    "host": "www.phpbb.com",
+                    "directory": "/customise/db/extension/sitemaker_content",
+                    "filename": "version_check"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel A.",
+                    "email": "shizzah@hotmail.com",
+                    "homepage": "https://github.com/blitze",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Create and manage content types for phpBB SiteMaker",
+            "homepage": "https://github.com/blitze/phpBB-ext-sitemaker_content",
+            "time": "2014-06-21T01:01:01+00:00"
+        },
+        {
+            "name": "blitze/sitemaker",
+            "version": "3.2.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blitze/phpBB-ext-sitemaker.git",
+                "reference": "fdfd9fa3063a6f969f46d0aff390383945e1d289"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blitze/phpBB-ext-sitemaker/zipball/fdfd9fa3063a6f969f46d0aff390383945e1d289",
+                "reference": "fdfd9fa3063a6f969f46d0aff390383945e1d289",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1.1",
+                "php": ">=5.4",
+                "simplepie/simplepie": "^1.5",
+                "urodoz/truncate-html": "@stable"
+            },
+            "require-dev": {
+                "phing/phing": "2.4.*",
+                "trippo/responsivefilemanager": "9.14.*"
+            },
+            "type": "phpbb-extension",
+            "extra": {
+                "display-name": "phpBB SiteMaker",
+                "soft-require": {
+                    "phpbb/phpbb": ">=3.2.1,<3.3.0@dev"
+                },
+                "version-check": {
+                    "host": "www.phpbb.com",
+                    "directory": "/customise/db/extension/phpbb_sitemaker_2",
+                    "filename": "version_check"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel A.",
+                    "email": "shizzah@hotmail.com",
+                    "homepage": "https://github.com/blitze",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "A portal/CMS for phpBB 3.2x.",
+            "homepage": "https://github.com/blitze/phpBB-ext-sitemaker",
+            "keywords": [
+                "cms",
+                "extension",
+                "phpbb",
+                "portal"
+            ],
+            "time": "2019-04-10T00:00:00+00:00"
+        },
+        {
+            "name": "cocur/slugify",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cocur/slugify.git",
+                "reference": "16cdd7e792657d524cde931ea666436623b23301"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/16cdd7e792657d524cde931ea666436623b23301",
+                "reference": "16cdd7e792657d524cde931ea666436623b23301",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "laravel/framework": "~4.1",
+                "latte/latte": "~2.2",
+                "mockery/mockery": "~0.9",
+                "nette/di": "~2.2",
+                "phpunit/phpunit": "~4.6",
+                "plumphp/plum": "~0.1",
+                "sami/sami": "~1.3",
+                "satooshi/php-coveralls": "0.6.*",
+                "silex/silex": "~1.2",
+                "symfony/dependency-injection": "~2.4",
+                "symfony/http-kernel": "~2.4",
+                "twig/twig": "~1",
+                "zendframework/zend-modulemanager": "~2.2",
+                "zendframework/zend-servicemanager": "~2.2",
+                "zendframework/zend-view": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cocur\\Slugify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivo Bathke",
+                    "email": "ivo.bathke@gmail.com"
+                },
+                {
+                    "name": "Florian Eckerstorfer",
+                    "email": "florian@eckerstorfer.co",
+                    "homepage": "https://florian.ec"
+                }
+            ],
+            "description": "Converts a string into a slug.",
+            "keywords": [
+                "slug",
+                "slugify"
+            ],
+            "time": "2016-02-11T09:53:46+00:00"
+        },
         {
             "name": "composer/installers",
             "version": "v1.6.0",
@@ -125,6 +298,123 @@
                 "zikula"
             ],
             "time": "2018-08-27T06:10:37+00:00"
+        },
+        {
+            "name": "simplepie/simplepie",
+            "version": "1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simplepie/simplepie.git",
+                "reference": "0e8fe72132dad765d25db4cabc69a91139af1263"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/0e8fe72132dad765d25db4cabc69a91139af1263",
+                "reference": "0e8fe72132dad765d25db4cabc69a91139af1263",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcre": "*",
+                "ext-xml": "*",
+                "ext-xmlreader": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.4.3 || ~6.5"
+            },
+            "suggest": {
+                "ext-curl": "",
+                "ext-iconv": "",
+                "ext-intl": "",
+                "ext-mbstring": "",
+                "mf2/mf2": "Microformat module that allows for parsing HTML for microformats"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SimplePie": "library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Parman",
+                    "homepage": "http://ryanparman.com/",
+                    "role": "Creator, alumnus developer"
+                },
+                {
+                    "name": "Geoffrey Sneddon",
+                    "homepage": "http://gsnedders.com/",
+                    "role": "Alumnus developer"
+                },
+                {
+                    "name": "Ryan McCue",
+                    "email": "me@ryanmccue.info",
+                    "homepage": "http://ryanmccue.info/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple Atom/RSS parsing library for PHP",
+            "homepage": "http://simplepie.org/",
+            "keywords": [
+                "atom",
+                "feeds",
+                "rss"
+            ],
+            "time": "2018-08-02T05:43:58+00:00"
+        },
+        {
+            "name": "urodoz/truncate-html",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/urodoz/truncateHTML.git",
+                "reference": "88fb29fd3a30c95b879f1642e08fd8746dd05bd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/urodoz/truncateHTML/zipball/88fb29fd3a30c95b879f1642e08fd8746dd05bd7",
+                "reference": "88fb29fd3a30c95b879f1642e08fd8746dd05bd7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4",
+                "symfony/dependency-injection": "~2.4",
+                "symfony/http-kernel": "~2.4",
+                "twig/twig": "~1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Urodoz\\Truncate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Albert Lacarta",
+                    "email": "urodoz@gmail.com",
+                    "homepage": "http://www.rqlogic.com"
+                }
+            ],
+            "description": "Handle truncate action on HTML strings",
+            "keywords": [
+                "content",
+                "html",
+                "shorten",
+                "truncate",
+                "truncating"
+            ],
+            "time": "2014-05-25T22:50:06+00:00"
         }
     ],
     "packages-dev": [

@@ -14,7 +14,8 @@
 	}],
 	"require": {
 		"php": ">=5.4",
-		"composer/installers": "^1.1"
+		"composer/installers": "^1.1",
+		"blitze/content": "^3.0.0-RC4"
 	},
 	"require-dev": {
 		"phing/phing": "2.4.*"
