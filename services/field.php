@@ -51,7 +51,7 @@ class field extends \blitze\content\services\form\field\base
 	public function get_default_props()
 	{
 		return array(
-			'type'			=> 'list',
+			'display'		=> 'list',
 			'colour'		=> 'dynamic',
 			'max_tags'		=> 0,
 			'is_db_field'	=> true,
@@ -70,7 +70,7 @@ class field extends \blitze\content\services\form\field\base
 
 		$this->delimitter = $this->language->lang('COMMA_SEPARATOR');
 
-		$tag_type = ($view_mode !== 'print') ? $data['field_props']['type'] : 'list';
+		$tag_type = ($view_mode !== 'print') ? $data['field_props']['display'] : 'list';
 		$tag_color = $data['field_props']['colour'];
 
 		$list = $this->get_html_list($data, $tag_type, $tag_color, $display_mode);
