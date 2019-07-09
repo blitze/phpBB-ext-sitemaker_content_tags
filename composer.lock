@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3335267c5c2a53280715f0b1622a0a0",
+    "content-hash": "a833e49e7f514e76a20f7d657111277a",
     "packages": [
         {
             "name": "blitze/content",
