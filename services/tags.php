@@ -51,16 +51,19 @@ class tags
 		$tags = $this->get_tags_by_name($tag_names);
 
 		// find non-existing tags
-		$new_tag_names = array_diff($tag_names, $tags);
+		$new_tag_names = array_filter(array_diff($tag_names, $tags));
 
-		// add non-existing tags
-		$this->add_tags($new_tag_names);
+		if (sizeof($new_tag_names))
+		{
+			// add non-existing tags
+			$this->add_tags($new_tag_names);
 
-		// get ids of newly added tags
-		$tags += $this->get_tags_by_name($new_tag_names);
+			// get ids of newly added tags
+			$tags += $this->get_tags_by_name($new_tag_names);
 
-		// add tags for current topic_id
-		$this->add_tags_data(array_keys($tags), $topic_id);
+			// add tags for current topic_id
+			$this->add_tags_data(array_keys($tags), $topic_id);
+		}
 	}
 
 	/**
