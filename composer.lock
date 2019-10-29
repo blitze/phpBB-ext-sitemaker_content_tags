@@ -49,9 +49,9 @@
             "authors": [
                 {
                     "name": "Daniel A.",
+                    "role": "Lead Developer",
                     "email": "shizzah@hotmail.com",
-                    "homepage": "https://github.com/blitze",
-                    "role": "Lead Developer"
+                    "homepage": "https://github.com/blitze"
                 }
             ],
             "description": "Create and manage content types for phpBB SiteMaker",
@@ -101,9 +101,9 @@
             "authors": [
                 {
                     "name": "Daniel A.",
+                    "role": "Lead Developer",
                     "email": "shizzah@hotmail.com",
-                    "homepage": "https://github.com/blitze",
-                    "role": "Lead Developer"
+                    "homepage": "https://github.com/blitze"
                 }
             ],
             "description": "A portal/CMS for phpBB 3.2x.",
@@ -181,16 +181,16 @@
         },
         {
             "name": "composer/installers",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+                "reference": "141b272484481432cda342727a427dc1e206bfa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-                "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+                "url": "https://api.github.com/repos/composer/installers/zipball/141b272484481432cda342727a427dc1e206bfa0",
+                "reference": "141b272484481432cda342727a427dc1e206bfa0",
                 "shasum": ""
             },
             "require": {
@@ -246,6 +246,7 @@
                 "RadPHP",
                 "SMF",
                 "Thelia",
+                "Whmcs",
                 "WolfCMS",
                 "agl",
                 "aimeos",
@@ -268,6 +269,7 @@
                 "installer",
                 "itop",
                 "joomla",
+                "known",
                 "kohana",
                 "laravel",
                 "lavalite",
@@ -297,7 +299,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2018-08-27T06:10:37+00:00"
+            "time": "2019-08-12T15:00:31+00:00"
         },
         {
             "name": "simplepie/simplepie",
@@ -342,19 +344,19 @@
             "authors": [
                 {
                     "name": "Ryan Parman",
-                    "homepage": "http://ryanparman.com/",
-                    "role": "Creator, alumnus developer"
+                    "role": "Creator, alumnus developer",
+                    "homepage": "http://ryanparman.com/"
                 },
                 {
                     "name": "Geoffrey Sneddon",
-                    "homepage": "http://gsnedders.com/",
-                    "role": "Alumnus developer"
+                    "role": "Alumnus developer",
+                    "homepage": "http://gsnedders.com/"
                 },
                 {
                     "name": "Ryan McCue",
+                    "role": "Developer",
                     "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/",
-                    "role": "Developer"
+                    "homepage": "http://ryanmccue.info/"
                 }
             ],
             "description": "A simple Atom/RSS parsing library for PHP",
@@ -454,8 +456,8 @@
             "authors": [
                 {
                     "name": "Michiel Rook",
-                    "email": "mrook@php.net",
-                    "role": "Lead"
+                    "role": "Lead",
+                    "email": "mrook@php.net"
                 },
                 {
                     "name": "Phing Community",
