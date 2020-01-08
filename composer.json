@@ -23,7 +23,7 @@
 	"extra": {
 		"display-name": "SiteMaker Content Tags",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.2,<3.3.0@dev"
+			"phpbb/phpbb": ">=3.2.7"
 		},
 		"version-check": {
 			"host": "www.phpbb.com",
